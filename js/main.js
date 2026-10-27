@@ -158,10 +158,23 @@
       stageEl.dataset.view = items[i].id;
     };
     setActive(0);
-    const io = new IntersectionObserver(entries => entries.forEach(e => {
-      if (e.isIntersecting) setActive(+e.target.dataset.i);
-    }), { rootMargin: '-45% 0px -45% 0px' });
-    models.forEach(m => io.observe(m));
+    // Активна модель, чья карточка ближе всего к центру экрана — одинаково при прокрутке вниз и вверх
+    let queued = false;
+    const pick = () => {
+      queued = false;
+      const mid = innerHeight / 2;
+      let best = 0, bestDist = Infinity;
+      models.forEach((m, k) => {
+        const r = m.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < bestDist) { bestDist = d; best = k; }
+      });
+      setActive(best);
+    };
+    const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(pick); } };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+    pick();
   }
 
   const ninja = $('[data-showcase="artisan"]');
