@@ -445,11 +445,18 @@ html.lenis, html.lenis body { height: auto; }
 
 .grid-3 { display: grid; gap: 16px; }
 @media (min-width: 900px) { .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.why { display: flex; flex-direction: column; gap: 14px; padding: clamp(28px, 3vw, 40px); min-height: 320px; }
-.why__num { font-size: clamp(80px, 10vw, 150px); line-height: .8; font-weight: 700; letter-spacing: -.07em; color: var(--accent); margin-bottom: auto; padding-bottom: 36px; }
-.why h3 { font-size: clamp(26px, 2.4vw, 34px); line-height: 1.05; letter-spacing: -.035em; font-weight: 700; }
-.why p { color: var(--muted); }
-@media (min-width: 900px) { .why { min-height: 420px; } }
+.why { margin: 0; padding: 4px clamp(22px, 3vw, 44px); list-style: none; }
+.why::before { display: none; }
+.why__row { display: grid; grid-template-columns: 30px 1fr; column-gap: 12px; row-gap: 8px; padding: 26px 0; }
+.why__row + .why__row { border-top: 1px solid rgba(18, 20, 23, .1); }
+.why__num { grid-row: span 2; font-size: 14px; font-weight: 700; color: var(--accent); line-height: 2; }
+.why h3 { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; }
+.why p { font-size: 17px; line-height: 1.55; color: #43474e; max-width: 54ch; }
+.why p a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+@media (min-width: 900px) {
+  .why__row { grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.3fr); column-gap: 32px; align-items: baseline; padding: 34px 0; }
+  .why__num { grid-row: auto; line-height: 1; }
+}
 
 /* ---------- Отзывы ---------- */
 
@@ -607,21 +614,27 @@ html.lenis, html.lenis body { height: auto; }
 }
 .lb__close::before, .lb__close::after { content: ""; position: absolute; width: 16px; height: 1.5px; background: currentColor; transform: rotate(45deg); }
 .lb__close::after { transform: rotate(-45deg); }
-.lb__perks {
-  grid-column: 1 / -1; display: grid; gap: 14px;
-  padding: 24px 28px 28px; border-top: 1px solid rgba(18, 20, 23, .1);
+.lb__more {
+  grid-column: 1 / -1; display: grid; gap: 28px;
+  padding: 24px 28px 30px; border-top: 1px solid rgba(18, 20, 23, .1);
 }
-.perks { display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
-.perk { display: flex; flex-direction: column; gap: 4px; }
-.perk__num { font-size: 12px; font-weight: 700; color: var(--accent); }
+.lb__col { display: grid; align-content: start; gap: 12px; }
+.perks { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.perk { display: grid; grid-template-columns: 28px 1fr; row-gap: 3px; }
+.perk__num { grid-row: span 2; font-size: 12px; font-weight: 700; color: var(--accent); line-height: 1.7; }
 .perk b { font-size: 16px; font-weight: 700; letter-spacing: -.02em; }
 .perk span:last-child { font-size: 14px; line-height: 1.45; color: var(--muted); }
-@media (min-width: 560px) { .perks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 820px) { .lb__perks { padding: 26px 40px 34px; } .perks { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; } }
+.specs { margin: 0; border-top: 1px solid rgba(18, 20, 23, .1); }
+.specs div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px; padding: 7px 0; border-bottom: 1px solid rgba(18, 20, 23, .1); font-size: 14px; }
+.specs dt { color: var(--muted); }
+.specs dd { margin: 0; font-weight: 500; }
+@media (min-width: 820px) {
+  .lb__more { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; padding: 22px 40px 24px; }
+}
 @media (min-width: 820px) {
   .lb__box { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
-  .lb__media { aspect-ratio: auto; min-height: 460px; }
-  .lb__body { padding: 40px 40px 32px; gap: 14px; }
+  .lb__media { aspect-ratio: auto; min-height: 420px; }
+  .lb__body { padding: 36px 40px 28px; gap: 12px; }
 }
 
 /* ---------- Курсор (только ПК) ---------- */

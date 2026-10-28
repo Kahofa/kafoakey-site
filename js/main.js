@@ -92,12 +92,19 @@
     }).join('')}</ul></div>`;
   };
 
-  const benefits = () => {
-    const list = C.BENEFITS || [];
-    if (!list.length) return '';
-    return `<div class="lb__perks"><span class="colors__lbl">Преимущества</span><ul class="perks">${list.map((b, i) =>
-      `<li class="perk"><span class="perk__num">0${i + 1}</span><b>${esc(b.title)}</b><span>${esc(b.text)}</span></li>`
-    ).join('')}</ul></div>`;
+  /* Преимущества и характеристики конкретной модели — нижняя часть окна карточки */
+  const details = p => {
+    const perks = p.perks || [];
+    const specs = Object.entries({ ...(p.specs || {}), ...(p.perks ? C.SPECS : {}) });
+    if (!perks.length && !specs.length) return '';
+    return `<div class="lb__more">
+      ${perks.length ? `<div class="lb__col"><span class="colors__lbl">Преимущества ${esc(p.name)}</span><ul class="perks">${perks.map(([title, text], i) =>
+        `<li class="perk"><span class="perk__num">0${i + 1}</span><b>${esc(title)}</b><span>${esc(text)}</span></li>`
+      ).join('')}</ul></div>` : ''}
+      ${specs.length ? `<div class="lb__col"><span class="colors__lbl">Характеристики</span><dl class="specs">${specs.map(([k, v]) =>
+        `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`
+      ).join('')}</dl></div>` : ''}
+    </div>`;
   };
 
   const card = (p, num, badge) => `
@@ -335,7 +342,7 @@
           ${sizes(p, true)}
           ${buyBtn(p)}
         </div>
-        ${benefits()}
+        ${details(p)}
       </div>`);
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
