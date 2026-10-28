@@ -294,16 +294,6 @@ html.lenis, html.lenis body { height: auto; }
   .hero__bar { font-size: 12px; }
 }
 
-/* ---------- Преимущества ---------- */
-
-.grid-4 { display: grid; gap: 16px; }
-@media (min-width: 640px)  { .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1100px) { .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.feat { display: flex; flex-direction: column; gap: 14px; min-height: 260px; padding: 28px; }
-.feat__num { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: auto; padding-bottom: 40px; }
-.feat h3 { font-size: 24px; line-height: 1.15; letter-spacing: -.03em; font-weight: 700; }
-.feat p { color: var(--muted); }
-@media (min-width: 1100px) { .feat { min-height: 330px; } }
 
 /* ---------- Витрина (Ninja FX / Dysphoria) ---------- */
 
@@ -439,7 +429,6 @@ html.lenis, html.lenis body { height: auto; }
 .gstop.is-hit::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 6px rgba(255, 90, 31, .2); }
 .gstop.is-hit .gnode b { color: var(--accent); }
 .gmap.is-filtering .gstop:not(.is-hit) { opacity: .28; }
-.gnote { margin-top: 18px; font-size: 13px; color: var(--muted); }
 
 @media (min-width: 1024px) {
   .gmap { grid-template-columns: 1fr 1fr; row-gap: 30px; }
@@ -618,10 +607,21 @@ html.lenis, html.lenis body { height: auto; }
 }
 .lb__close::before, .lb__close::after { content: ""; position: absolute; width: 16px; height: 1.5px; background: currentColor; transform: rotate(45deg); }
 .lb__close::after { transform: rotate(-45deg); }
+.lb__perks {
+  grid-column: 1 / -1; display: grid; gap: 14px;
+  padding: 24px 28px 28px; border-top: 1px solid rgba(18, 20, 23, .1);
+}
+.perks { display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.perk { display: flex; flex-direction: column; gap: 4px; }
+.perk__num { font-size: 12px; font-weight: 700; color: var(--accent); }
+.perk b { font-size: 16px; font-weight: 700; letter-spacing: -.02em; }
+.perk span:last-child { font-size: 14px; line-height: 1.45; color: var(--muted); }
+@media (min-width: 560px) { .perks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 820px) { .lb__perks { padding: 26px 40px 34px; } .perks { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; } }
 @media (min-width: 820px) {
   .lb__box { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
-  .lb__media { aspect-ratio: auto; min-height: 520px; }
-  .lb__body { padding: 48px 40px; }
+  .lb__media { aspect-ratio: auto; min-height: 460px; }
+  .lb__body { padding: 40px 40px 32px; gap: 14px; }
 }
 
 /* ---------- Курсор (только ПК) ---------- */

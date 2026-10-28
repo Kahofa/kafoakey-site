@@ -92,6 +92,14 @@
     }).join('')}</ul></div>`;
   };
 
+  const benefits = () => {
+    const list = C.BENEFITS || [];
+    if (!list.length) return '';
+    return `<div class="lb__perks"><span class="colors__lbl">Преимущества</span><ul class="perks">${list.map((b, i) =>
+      `<li class="perk"><span class="perk__num">0${i + 1}</span><b>${esc(b.title)}</b><span>${esc(b.text)}</span></li>`
+    ).join('')}</ul></div>`;
+  };
+
   const card = (p, num, badge) => `
     <div class="pcard card" data-reveal data-view="${esc(p.id)}">
       ${media(p, 'pcard__media')}
@@ -327,6 +335,7 @@
           ${sizes(p, true)}
           ${buyBtn(p)}
         </div>
+        ${benefits()}
       </div>`);
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
